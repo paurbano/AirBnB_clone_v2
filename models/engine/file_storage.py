@@ -20,12 +20,24 @@ class FileStorage:
     __file_path = "file.json"
     __objects = {}
 
+    # add cls parameter for taks 5
+    # return a dictionary by class parameter
     def all(self, cls=None):
         """returns a dictionary
         Return:
             returns a dictionary of __object
         """
-        return self.__objects
+        if cls is None:
+            return self.__objects
+        # if a class is passed return dictionary with objects
+        # of that class
+        class_dict = {}
+        for key, value in self.__objects.items():
+            _class = value.__class__
+            _value = value.__class__.__name__
+            if cls == _class or cls == _value:
+                class_dict[key] = value
+        return class_dict
 
     def new(self, obj):
         """sets __object to given obj
