@@ -43,6 +43,25 @@ class HBNBCommand(cmd.Cmd):
                 raise SyntaxError()
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
+            # Task 02 - to allow for object creation with n given parameters
+            for i in range(len(my_list) - 1):
+                parameter_i = my_list[i + 1].split("=")     # split parameters
+                if len(parameter_i) == 2:
+                    key = parameter_i[0]
+                    value = parameter_i[1]
+                    if value[0] == "\"":       # value of param is str
+                        if " " in value[0]:    # if spaces, skip. NO NEEDED!!!
+                            continue
+                        setattr(obj, key, value.strip('\"'))
+                    try:
+                        if value[0].isdigit():      # value of param is num
+                            if len(value.split(".")) == 2:
+                                setattr(obj, key, float(value))
+                            elif len(value.split(".")) == 1:
+                                setattr(obj, key, int(value))
+                    except ValueError:
+                        continue
+            ##############################################################
             obj.save()
             print("{}".format(obj.id))
         except SyntaxError:
@@ -239,7 +258,8 @@ class HBNBCommand(cmd.Cmd):
             elif my_list[1][:6] == "update":
                 args = self.strip_clean(my_list)
                 if isinstance(args, list):
-                    obj = storage.all()
+                    # obj = storage.all()    #obj - unused variable
+                    storage.all()
                     key = args[0] + ' ' + args[1]
                     for k, v in args[2].items():
                         self.do_update(key + ' "{}" "{}"'.format(k, v))
