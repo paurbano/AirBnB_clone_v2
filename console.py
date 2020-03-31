@@ -44,15 +44,15 @@ class HBNBCommand(cmd.Cmd):
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
             # Task 02 - to allow for object creation with n given parameters
-            for i in range(len(my_list) - 1):
-                parameter_i = my_list[i + 1].split("=")     # split parameters
-                if len(parameter_i) == 2:
-                    key = parameter_i[0]
-                    value = parameter_i[1]
+            for parameter_i in my_list[1:]:
+                parameter = parameter_i.split("=")     # split parameters
+                if len(parameter) == 2:
+                    key = parameter[0]
+                    value = parameter[1]
                     if value[0] == "\"":       # value of param is str
-                        if " " in value[0]:    # if spaces, skip. NO NEEDED!!!
-                            continue
-                        setattr(obj, key, value.strip('\"'))
+                        value = value.strip('"')
+                        value = value.replace('_', ' ')
+                        setattr(obj, key, value)
                     try:
                         if value[0].isdigit():      # value of param is num
                             if len(value.split(".")) == 2:
