@@ -3,13 +3,22 @@
 import uuid
 import models
 from datetime import datetime
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy import Column,  Integer, String
+Base = declarative_base()
 
 
-class BaseModel:
+class BaseModel():
     """This class will defines all common attributes/methods
     for other classes
     """
-
+    ''' Update class definition to use SQLAlchemy
+    '''
+    # attributes for task 6
+    '''id = Column(String(60), primary_key=True)
+    created_at = Column(datetime, nullable=False, default=datetime.utcnow())
+    updated_at = COlumn(datetime, nullable=False, default=datetime.utcnow())
+    '''
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
         Args:
@@ -29,7 +38,8 @@ class BaseModel:
         else:
             self.id = str(uuid.uuid4())
             self.created_at = self.updated_at = datetime.now()
-            models.storage.new(self)
+            # move it to save method for task 6
+            # models.storage.new(self)
 
     def __str__(self):
         """returns a string
@@ -48,7 +58,9 @@ class BaseModel:
         """updates the public instance attribute updated_at to current
         """
         self.updated_at = datetime.now()
-        models.storage.save()
+        # moved from def __init__(self, *args, **kwargs) to here task 6
+        models.storage.new(self)
+        # models.storage.save()
 
     def to_dict(self):
         """creates dictionary of the class  and returns
@@ -60,3 +72,7 @@ class BaseModel:
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
         return my_dict
+
+    # Need to implement functionality for AirBnB_V2
+    def delete(self):
+        models.storage.delete(self)
