@@ -49,18 +49,10 @@ class HBNBCommand(cmd.Cmd):
                 if len(parameter) == 2:
                     key = parameter[0]
                     value = parameter[1]
-                    if value[0] == "\"":       # value of param is str
-                        value = value.strip('"')
-                        value = value.replace('_', ' ')
-                        setattr(obj, key, value)
-                    try:
-                        if value[0].isdigit():      # value of param is num
-                            if len(value.split(".")) == 2:
-                                setattr(obj, key, float(value))
-                            elif len(value.split(".")) == 1:
-                                setattr(obj, key, int(value))
-                    except ValueError:
-                        continue
+                    #if value[0] == "\"":       # value of param is str
+                    value = value.strip('"')
+                    value = value.replace('_', ' ')
+                    setattr(obj, key, value)
             ##############################################################
             obj.save()
             print("{}".format(obj.id))
