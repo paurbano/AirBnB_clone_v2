@@ -4,7 +4,9 @@ import uuid
 import models
 from datetime import datetime
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column,  Integer, String
+from sqlalchemy import Column, Integer, String, DateTime
+
+# create Base object for task 6
 Base = declarative_base()
 
 
@@ -15,10 +17,10 @@ class BaseModel():
     ''' Update class definition to use SQLAlchemy
     '''
     # attributes for task 6
-    '''id = Column(String(60), primary_key=True)
-    created_at = Column(datetime, nullable=False, default=datetime.utcnow())
-    updated_at = COlumn(datetime, nullable=False, default=datetime.utcnow())
-    '''
+    id = Column(String(60), primary_key=True)
+    created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
+    
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
         Args:
@@ -36,9 +38,10 @@ class BaseModel():
                 if key != "__class__":
                     setattr(self, key, value)
         else:
-            self.id = str(uuid.uuid4())
-            self.created_at = self.updated_at = datetime.now()
+            self.id = str(uuid.uuid4()) # unique id
+            self.created_at = self.updated_at = datetime.now() # datetime when is created
             # move it to save method for task 6
+            # afecta guardar de la 2
             # models.storage.new(self)
 
     def __str__(self):
@@ -59,8 +62,9 @@ class BaseModel():
         """
         self.updated_at = datetime.now()
         # moved from def __init__(self, *args, **kwargs) to here task 6
+        # afecta el guardar de la 2
         models.storage.new(self)
-        # models.storage.save()
+        models.storage.save()
 
     def to_dict(self):
         """creates dictionary of the class  and returns
@@ -71,8 +75,15 @@ class BaseModel():
         my_dict["__class__"] = str(type(self).__name__)
         my_dict["created_at"] = self.created_at.isoformat()
         my_dict["updated_at"] = self.updated_at.isoformat()
+        # update for task6
+        # pendiente revisar task2
+        key_to_delete = "_sa_instance_state"
+        if key_to_delete in my_dict:
+            del my_dict[key_to_delete]
+
         return my_dict
 
     # Need to implement functionality for AirBnB_V2
     def delete(self):
+        """delete the current instance from the storage """
         models.storage.delete(self)
