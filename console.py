@@ -12,13 +12,6 @@ from models.place import Place
 from models.review import Review
 from shlex import split
 
-def is_float(value):
-    a = value
-    try:
-        float(a)
-        return True
-    except:
-        return False
 
 class HBNBCommand(cmd.Cmd):
     """this class is entry point of the command interpreter
@@ -51,19 +44,21 @@ class HBNBCommand(cmd.Cmd):
             my_list = line.split(" ")
             obj = eval("{}()".format(my_list[0]))
             # Task 02 - to allow for object creation with n given parameters
-            for parameter_i in my_list[1:]:             # example: User name="Betty" cel=315
-                parameter = parameter_i.split("=")      # split parameters
+            for parameter_i in my_list[1:]:
+                parameter = parameter_i.split("=")
                 if len(parameter) == 2:
-                    key = parameter[0]                  # example: name
-                    value = parameter[1]                # example: "Betty"
-                    if value[0] == '"' and value[len(value) - 1] == '"':    # value of param is str
+                    key = parameter[0]
+                    value = parameter[1]
+                    # value of param is str
+                    if value[0] == '"' and value[len(value) - 1] == '"':
                         value = value.strip('"')
                         value = value.replace('_', ' ')
                         value = value.replace('"', '\\"')
                         setattr(obj, key, value)
                     else:
                         try:
-                            if value[0].isnumeric():      # value of param is float
+                            # value of param is float
+                            if value[0].isnumeric():
                                 if len(value.split(".")) == 2:
                                     setattr(obj, key, float(value))
                                 elif len(value.split(".")) == 1:
