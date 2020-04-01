@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """This is the console for AirBnB"""
 import cmd
+from ast import literal_eval
 from models import storage
 from datetime import datetime
 from models.base_model import BaseModel
@@ -49,6 +50,16 @@ class HBNBCommand(cmd.Cmd):
                 if len(parameter) == 2:
                     key = parameter[0]
                     value = parameter[1]
+                    value = value[0] + value[1:-1].replace('"', '\\"') + value[len(value) - 1]
+                    value = literal_eval(value)
+                    if type(value) is str:
+                        value = value.strip('"')
+                        value = value.replace('_', ' ')
+                        setattr(obj, key, value)
+                    else:
+                        setattr(obj, key, value)
+
+                    '''
                     # value of param is str
                     if value[0] == '"' and value[len(value) - 1] == '"':
                         value = value.strip('"')
@@ -69,6 +80,7 @@ class HBNBCommand(cmd.Cmd):
                                 setattr(obj, key, int(value))
                         except ValueError:
                             continue
+                    '''
             ##############################################################
             obj.save()
             print("{}".format(obj.id))
