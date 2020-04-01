@@ -50,7 +50,8 @@ class HBNBCommand(cmd.Cmd):
                 if len(parameter) == 2:
                     key = parameter[0]
                     value = parameter[1]
-                    value = value[0] + value[1:-1].replace('"', '\\"') + value[len(value) - 1]
+                    value = value[0] + value[1:-1].replace('"', '\\"') + \
+                        value[len(value) - 1]
                     value = literal_eval(value)
                     if type(value) is str:
                         value = value.strip('"')
