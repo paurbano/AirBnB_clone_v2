@@ -58,11 +58,11 @@ class HBNBCommand(cmd.Cmd):
                     else:
                         try:
                             # value of param is float
-                            if value[0].isnumeric():
-                                if len(value.split(".")) == 2:
-                                    setattr(obj, key, float(value))
-                                elif len(value.split(".")) == 1:
-                                    setattr(obj, key, int(value))
+                            if len(value.split(".")) == 2:
+                                setattr(obj, key, float(value))
+                            # value of param is int
+                            elif len(value.split(".")) == 1:
+                                setattr(obj, key, int(value))
                         except ValueError:
                             continue
             ##############################################################
