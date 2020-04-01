@@ -55,6 +55,10 @@ class HBNBCommand(cmd.Cmd):
                         value = value.replace('_', ' ')
                         value = value.replace('"', '\\"')
                         setattr(obj, key, value)
+                    elif value[0] == '"' and value[len(value) - 1] != '"':
+                        raise ValueError()
+                    elif value[0] != '"' and value[len(value) - 1] == '"':
+                        raise ValueError()
                     else:
                         try:
                             # value of param is float
