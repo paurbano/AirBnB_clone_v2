@@ -56,6 +56,7 @@ class HBNBCommand(cmd.Cmd):
                     if type(value) is str:
                         value = value.strip('"')
                         value = value.replace('_', ' ')
+                        value = value.replace('"', '\\"')
                         setattr(obj, key, value)
                     else:
                         setattr(obj, key, value)
