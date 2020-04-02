@@ -21,9 +21,9 @@ class Place(BaseModel, Base):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
-    # Condition required for task 8
-    __tablename__ = "places"
+    # Condition required for task 9
     if getenv("HBNB_TYPE_STORAGE") == "db":
+        __tablename__ = "places"
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)
@@ -50,6 +50,7 @@ class Place(BaseModel, Base):
         longitude = 0.0
         amenity_ids = []
 
+    # Condition for task 9
     if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def reviews(self):
