@@ -24,7 +24,7 @@ class Place(BaseModel, Base):
         amenity_ids: list of Amenity ids
     """
     # Condition required for task 9
-    #if getenv("HBNB_TYPE_STORAGE") == "db":
+    # if getenv("HBNB_TYPE_STORAGE") == "db":
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
     user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
@@ -39,7 +39,7 @@ class Place(BaseModel, Base):
     amenity_ids = []
     if getenv('HBNB_TYPE_STORAGE') == 'db':
         reviews = relationship('Review', backref='place',
-                                cascade='all, delete-orphan')
+                               cascade='all, delete-orphan')
     else:
         '''
         city_id = ""
@@ -62,7 +62,7 @@ class Place(BaseModel, Base):
             list_reviews = []
             dic_reviews = models.storage.all(Review)
             for review in dic_reviews.values():
-            #for review in self.reviews:
+                # for review in self.reviews:
                 if review.place_id == self.id:
                     list_reviews.append(review)
             return list_reviews

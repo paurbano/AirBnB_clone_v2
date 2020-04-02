@@ -20,7 +20,7 @@ class BaseModel():
     id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, nullable=False, default=datetime.utcnow)
     updated_at = Column(DateTime, nullable=False, default=datetime.utcnow)
-    
+
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
         Args:
@@ -42,8 +42,10 @@ class BaseModel():
             # Aiko's change for task2
             # models.storage.new(self)
         else:
-            self.id = str(uuid.uuid4()) # unique id
-            self.created_at = self.updated_at = datetime.now() # datetime when is created
+            # unique id
+            self.id = str(uuid.uuid4())
+            # datetime when is created
+            self.created_at = self.updated_at = datetime.now()
             # move it to save method for task 6
             # afecta guardar de la 2
             # models.storage.new(self)

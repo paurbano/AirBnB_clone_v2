@@ -62,7 +62,8 @@ class TestUser(unittest.TestCase):
         self.assertEqual(type(self.user.first_name), str)
         self.assertEqual(type(self.user.first_name), str)
 
-    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')    def test_save_User(self):
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')
+    def test_save_User(self):
         """test if the save works"""
         self.user.save()
         self.assertNotEqual(self.user.created_at, self.user.updated_at)
