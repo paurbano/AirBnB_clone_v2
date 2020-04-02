@@ -52,19 +52,6 @@ class Place(BaseModel, Base):
         amenities = relationship('Amenity', secondary=place_amenity,
                                  backref='places', viewonly=False)
     else:
-        '''
-        city_id = ""
-        user_id = ""
-        name = ""
-        description = ""
-        number_rooms = 0
-        number_bathrooms = 0
-        max_guest = 0
-        price_by_night = 0
-        latitude = 0.0
-        longitude = 0.0
-        amenity_ids = []
-        '''
     # Condition for task 9
     # if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
@@ -83,9 +70,9 @@ class Place(BaseModel, Base):
         def amenities(self):
             """ Getter: return list of Amenity linked to a Place """
             list_amenities = []
-            dic_amenities = models.storage.all(models.amenity.Amenity)
-            for amenity in dic_amenities.values():
-                if self.id == amenity.place_id:
+            # dic_amenities = models.storage.all(models.amenity.Amenity)
+            for amenity in amenity_ids:
+                if self.id == amenity.id:
                     list_amenities.append(amenity)
             return list_amenities
 
