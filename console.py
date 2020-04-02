@@ -47,42 +47,14 @@ class HBNBCommand(cmd.Cmd):
             # Task 02 - to allow for object creation with n given parameters
             for parameter_i in my_list[1:]:
                 parameter = parameter_i.split("=")
-                if len(parameter) == 2:
-                    key = parameter[0]
-                    value = parameter[1]
-                    value = value[0] + value[1:-1].replace('"', '\\"') + \
-                        value[len(value) - 1]
-                    value = literal_eval(value)
-                    if type(value) is str:
-                        value = value.strip('"')
-                        value = value.replace('_', ' ')
-                        value = value.replace('"', '\\"')
-                        setattr(obj, key, value)
-                    else:
-                        setattr(obj, key, value)
+                item_type = literal_eval(parameter[1])
+                if type(item_type) is str:
+                    parameter[1] = parameter[1].replace('_', ' ')
+                    var = parameter[1][1:-1].replace('"', '\\"')
+                    setattr(obj, parameter[0], var)
+                elif type(item_type) is int or type(item_type) is float:
+                    setattr(obj, parameter[0], eval(parameter[1]))
 
-                    '''
-                    # value of param is str
-                    if value[0] == '"' and value[len(value) - 1] == '"':
-                        value = value.strip('"')
-                        value = value.replace('_', ' ')
-                        value = value.replace('"', '\\"')
-                        setattr(obj, key, value)
-                    elif value[0] == '"' and value[len(value) - 1] != '"':
-                        raise ValueError()
-                    elif value[0] != '"' and value[len(value) - 1] == '"':
-                        raise ValueError()
-                    else:
-                        try:
-                            # value of param is float
-                            if len(value.split(".")) == 2:
-                                setattr(obj, key, float(value))
-                            # value of param is int
-                            elif len(value.split(".")) == 1:
-                                setattr(obj, key, int(value))
-                        except ValueError:
-                            continue
-                    '''
             ##############################################################
             obj.save()
             print("{}".format(obj.id))
