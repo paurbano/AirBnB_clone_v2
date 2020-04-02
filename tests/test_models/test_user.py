@@ -81,7 +81,7 @@ class TestUser(unittest.TestCase):
         del self.user
 
     @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'file', 'db storage')
-    def test_delete_user_file(self):
+    def test_delete_user_db(self):
         """test if delete works"""
         self.user = User()
         self.user.first_name = 'Betty'
