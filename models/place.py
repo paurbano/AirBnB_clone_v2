@@ -52,8 +52,8 @@ class Place(BaseModel, Base):
         amenities = relationship('Amenity', secondary=place_amenity,
                                  backref='places', viewonly=False)
     else:
-    # Condition for task 9
-    # if getenv("HBNB_TYPE_STORAGE") != "db":
+        # Condition for task 9
+        # if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def reviews(self):
             """ getter: return list of reviews"""
