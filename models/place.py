@@ -2,7 +2,6 @@
 """This is the place class"""
 from os import getenv
 from models.base_model import BaseModel, Base
-from models.review import Review
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship
 
@@ -22,9 +21,9 @@ class Place(BaseModel, Base):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
-    # Condition required for task 9
+    # Condition required for task 8
+    __tablename__ = "places"
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = "places"
         city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
         user_id = Column(String(60), ForeignKey('users.id'), nullable=False)
         name = Column(String(128), nullable=False)
@@ -37,25 +36,27 @@ class Place(BaseModel, Base):
         longitude = Column(Float, nullable=True)
         reviews = relationship('Review', backref='place',
                                cascade='all, delete')
+        amenity_ids = []
     else:
         city_id = ""
         user_id = ""
         name = ""
         description = ""
-        number_rooms = ""
-        number_bathrooms = ""
-        max_guest = ""
-        price_by_night = ""
-        latitude = ""
-        longitude = ""
+        number_rooms = 0
+        number_bathrooms = 0
+        max_guest = 0
+        price_by_night = 0
+        latitude = 0.0
+        longitude = 0.0
         amenity_ids = []
 
     if getenv("HBNB_TYPE_STORAGE") != "db":
         @property
         def reviews(self):
+            """ getter: return list of reviews"""
             list_reviews = []
             dic_reviews = models.Storage.all(Review)
-            for review in dic_reviews.items():
+            for review in dic_reviews.values():
                 if review.place_id == self.id:
                     list_reviews.append(review)
             return list_reviews
