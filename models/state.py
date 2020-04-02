@@ -15,19 +15,20 @@ class State(BaseModel, Base):
         name: input name
     """
     # Added for task 6
+    #if getenv("HBNB_TYPE_STORAGE") == "db":
+    __tablename__ = "states"
+    name = Column(String(128), nullable=False)
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = "states"
-        name = Column(String(128), nullable=False)
         cities = relationship('City', backref='state', cascade="all, delete")
     else:
         name = ""
 
     # Added for task 6
-    if getenv("HBNB_TYPE_STORAGE") == "file":
+    # if getenv("HBNB_TYPE_STORAGE") == "file":
         @property
         def cities(self):
             list_of_cities = []
-            dic_cities = models.Storage.all(City)
+            dic_cities = models.storage.all(City)
             for city in dic_cities.items():
                 if city.state_id == self.id:
                     list_of_cities.append(city)
