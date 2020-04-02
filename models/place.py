@@ -3,7 +3,6 @@
 import models
 from os import getenv
 from models.review import Review
-from models.amenity import Amenity
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
@@ -84,7 +83,7 @@ class Place(BaseModel, Base):
         def amenities(self):
             """ Getter: return list of Amenity linked to a Place """
             list_amenities = []
-            dic_amenities = models.storage.all(Amenity)
+            dic_amenities = models.storage.all(models.amenity.Amenity)
             for amenity in dic_amenities.values():
                 if self.id == amenity.place_id:
                     list_amenities.append(amenity)
