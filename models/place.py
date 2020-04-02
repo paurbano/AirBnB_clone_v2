@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 """This is the place class"""
-import models
 from os import getenv
 from models.base_model import BaseModel, Base
 from models.review import Review
@@ -17,6 +16,15 @@ place_amenity = Table("place_amenity", Base.metadata,
                              ForeignKey('amenities.id'), primary_key=True,
                              nullable=False)
                       )
+
+'''# Requierement  for task 10
+place_amenity = Table("place_amenity", Base.metadata,
+                      Column('place_id', String(60),
+                             ForeignKey('places.id'), nullable=False),
+                      Column('amenity_id', String(60),
+                             ForeignKey('amenities.id'), nullable=False)
+                      )
+'''
 
 
 class Place(BaseModel, Base):
