@@ -52,10 +52,29 @@ class TestBaseModel(unittest.TestCase):
         """test if the base is an type BaseModel"""
         self.assertTrue(isinstance(self.base, BaseModel))
 
-    def test_save_BaesModel(self):
+    def test_new_method(self):
+        """checking if delete method was added"""
+        self.assertTrue(hasattr(BaseModel, "delete"))
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')
+    def test_save_BaseModel(self):
         """test if the save works"""
         self.base.save()
         self.assertNotEqual(self.base.created_at, self.base.updated_at)
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')
+    def test_delete_basemodel_file(self):
+        """test if delete works"""
+        self.base = BaseModel()
+        self.base.name = 'Betty'
+        del self.base
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'file', 'db storage')
+    def test_delete_basemodel_db(self):
+        """test if delete works"""
+        self.base = BaseModel()
+        self.base.name = 'Betty'
+        del self.base
 
     def test_to_dict_BaseModel(self):
         """test if dictionary works"""

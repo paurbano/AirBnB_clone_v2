@@ -53,7 +53,7 @@ class TestState(unittest.TestCase):
         """test attribute type for State"""
         self.assertEqual(type(self.state.name), str)
 
-    def test_save_State(self):
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')    def test_save_State(self):
         """test if the save works"""
         self.state.save()
         self.assertNotEqual(self.state.created_at, self.state.updated_at)
@@ -62,6 +62,19 @@ class TestState(unittest.TestCase):
         """test if dictionary works"""
         self.assertEqual('to_dict' in dir(self.state), True)
 
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'db', 'file storage')
+    def test_delete_state_file(self):
+        """test if delete works"""
+        self.state = State()
+        self.state.name = 'Valey'
+        del self.state
+
+    @unittest.skipIf(os.getenv('HBNB_TYPE_STORAGE') == 'file', 'db storage')
+    def test_delete_state_db(self):
+        """test if delete works"""
+        self.state = State()
+        self.state.name = 'Valey'
+        del self.state
 
 if __name__ == "__main__":
     unittest.main()
