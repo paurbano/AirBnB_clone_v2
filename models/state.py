@@ -8,9 +8,6 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column,  Integer, String
 from sqlalchemy.orm import relationship
 
-# Added for task 6
-# Base = declarative_base()
-
 
 class State(BaseModel, Base):
     """This is the class for State
