@@ -32,11 +32,15 @@ class BaseModel():
             updated_at: updated date
         """
         if kwargs:
+            # Aiko's change for taks 2
+            # self.id = str(uuid.uuid4())
             for key, value in kwargs.items():
                 if key == "created_at" or key == "updated_at":
                     value = datetime.strptime(value, "%Y-%m-%dT%H:%M:%S.%f")
                 if key != "__class__":
                     setattr(self, key, value)
+            # Aiko's change for task2
+            # models.storage.new(self)
         else:
             self.id = str(uuid.uuid4()) # unique id
             self.created_at = self.updated_at = datetime.now() # datetime when is created
@@ -60,6 +64,7 @@ class BaseModel():
     def save(self):
         """updates the public instance attribute updated_at to current
         """
+        self.created_at = datetime.now()
         self.updated_at = datetime.now()
         # moved from def __init__(self, *args, **kwargs) to here task 6
         # afecta el guardar de la 2
