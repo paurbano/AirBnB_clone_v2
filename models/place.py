@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
-from os import getenv
 import models
+from os import getenv
 from models.base_model import BaseModel, Base
 from models.review import Review
 from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
@@ -15,7 +15,9 @@ place_amenity = Table("place_amenity", Base.metadata,
                              nullable=False),
                       Column('amenity_id', String(60),
                              ForeignKey('amenities.id'), primary_key=True,
-                             nullable=False))
+                             nullable=False)
+                      )
+
 
 class Place(BaseModel, Base):
     """This is the class for Place
