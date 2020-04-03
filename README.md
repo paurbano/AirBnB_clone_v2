@@ -40,6 +40,7 @@ This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.
 * `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
 `models/` directory contains classes used for this project:
+
 [base_model.py](https://github.com/paurbano/AirBnB_clone_v2/blob/master/models/base_model.py) - The BaseModel class from which future classes will be derived
 
 * `def __init__(self, *args, **kwargs)` - Initialization of the base model
@@ -47,6 +48,9 @@ This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.
 * `def save(self)` - Updates the attribute updated_at with the current datetime
 * `def to_dict(self)` - returns a dictionary containing all keys/values of the instance
 
+`models/engine` directory contains Storage classes to File JSON or DB MySQL:
+* [file_storage.py](https://github.com/paurbano/AirBnB_clone_v2/blob/master/models/engine/file_storage.py) - serializes instances to a JSON file & deserializes back to instances
+* [db_storage.py](https://github.com/paurbano/AirBnB_clone_v2/blob/master/models/engine/db_storage.py) - Connect to MySQL and do CRUD operations
 
 ### Commands:
 * create - create an object
