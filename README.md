@@ -10,7 +10,6 @@ The console is the first segment of the AirBnB project at Holberton School that 
 
 ### Supported classes:
 * BaseModel
-This classes inherited from Base Model:
 * User
 * State
 * City
@@ -30,22 +29,22 @@ This project is interpreted/tested on Ubuntu 14.04 LTS using python3 (version 3.
 # File Descriptions
 console.py - the console contains the entry point of the command interpreter. List of commands this console current supports:
 
-* EOF - exits console
-* quit - exits console
-* <emptyline> - overwrites default emptyline method and does nothing
-* create - Creates a new instance ofBaseModel, saves it (to the JSON file) and prints the id
-* destroy - Deletes an instance based on the class name and id (save the change into the JSON file).
-* show - Prints the string representation of an instance based on the class name and id.
-* all - Prints all string representation of all instances based or not on the class name.
-* update - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
+* `EOF` - exits console
+* `quit` - exits console
+* `<emptyline>` - overwrites default emptyline method and does nothing
+* `create` - Creates a new instance ofBaseModel, saves it (to the JSON file) and prints the id
+* `destroy` - Deletes an instance based on the class name and id (save the change into the JSON file).
+* `show` - Prints the string representation of an instance based on the class name and id.
+* `all` - Prints all string representation of all instances based or not on the class name.
+* `update` - Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file).
 
-models/ directory contains classes used for this project:
+`models/` directory contains classes used for this project:
 base_model.py - The BaseModel class from which future classes will be derived
 
-* def __init__(self, *args, **kwargs) - Initialization of the base model
-* def __str__(self) - String representation of the BaseModel class
-* def save(self) - Updates the attribute updated_at with the current datetime
-* def to_dict(self) - returns a dictionary containing all keys/values of the instance
+* `def __init__(self, *args, **kwargs)` - Initialization of the base model
+* `def __str__(self)` - String representation of the BaseModel class
+* `def save(self)` - Updates the attribute updated_at with the current datetime
+* `def to_dict(self)` - returns a dictionary containing all keys/values of the instance
 
 
 ### Commands:
@@ -62,6 +61,7 @@ To start, navigate to the project folder and enter `./console.py` in the shell.
 `create <class name>`
 Ex:
 `create BaseModel`
+    (hbnb) create State name="California"
 
 #### Show
 `show <class name> <object id>`
