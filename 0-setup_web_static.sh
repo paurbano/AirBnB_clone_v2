@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # sets up web servers for the deployment of web_static
 ALIAS="\\\tlocation /hbnb_static/ {\n\t\t alias /data/web_static/current/;\n\t}\n"
-SRC="/etc/nginx/sites-available/default"
+SRC="/etc/nginx/sites-enable/default"
 sudo mkdir /data/
 sudo mkdir /data/web_static/
 sudo mkdir /data/web_static/releases/
@@ -13,7 +13,6 @@ then
     ubuntu rm "/data/web_static/current"
 else
     sudo ln -s /data/web_static/releases/test/ /data/web_static/current
-    sudo chown 
 fi
 sudo chown -R ubuntu:ubuntu /data/
 sudo sed -i "30i $ALIAS" $SRC
