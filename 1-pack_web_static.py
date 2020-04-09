@@ -10,7 +10,9 @@ from datetime import datetime
 def do_pack():
     timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
     file_path = "versions/web_static_" + timestamp + ".tgz"
+    # create directory versions
     local("mkdir -p versions")
+    # compress all web_static content to
     local("tar -cvzf " + file_path + " web_static")
     if os.path.exists(file_path):
         pass
