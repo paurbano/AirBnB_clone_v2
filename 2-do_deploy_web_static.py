@@ -11,18 +11,6 @@ env.key_filename = "~/.ssh/holberton"
 env.warn_only = True
 
 
-def do_pack():
-    """ compress files """
-    timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-    file_path = "versions/web_static_" + timestamp + ".tgz"
-    local("mkdir -p versions")
-    local("tar -cvzf " + file_path + " web_static")
-    if os.path.exists(file_path):
-        return file_path
-    else:
-        return None
-
-
 def do_deploy(archive_path):
     """ upload to web servers and deploy """
     if not os.path.exists(archive_path) and not os.path.isfile(archive_path):
@@ -40,10 +28,12 @@ def do_deploy(archive_path):
         # Delete file uploaded
         run("rm /tmp/" + filename + ".tgz")
 
-        run("sudo mv /data/web_static/releases/" + filename +
+        # move files to a previous folder
+        run("mv /data/web_static/releases/" + filename +
             "/web_static/* /data/web_static/releases/" + filename + "/")
 
-        run("sudo rm -rf /data/web_static/releases/" + filename +
+        # delete that folder
+        run("rm -rf /data/web_static/releases/" + filename +
             "/web_static")
 
         # delete symbolic link /data/web_static/current
