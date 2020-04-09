@@ -39,10 +39,7 @@ def do_deploy(archive_path):
         run("tar -xzf /tmp/" + filename + ".tgz" +
             " -C /data/web_static/releases/" + filename + "/")
         # Delete archive upload
-        run("rm -rf /tmp/" + filename + ".tgz")
-        '''# delete file move it
-        run("rm -rf /data/web_static/releases/" + filename +
-            "/web_static")'''
+        run("rm /tmp/" + filename + ".tgz")
         # delete symbolic link /data/web_static/current
         run("rm -rf /data/web_static/current")
         # create a new symbolic link
