@@ -15,6 +15,7 @@ def do_pack():
     # compress all web_static content to
     local("tar -cvzf " + file_path + " web_static")
     if os.path.exists(file_path):
-        pass
+        file_size = os.path.getsize(file_path)
+        return file_path
     else:
         return None
