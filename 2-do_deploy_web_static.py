@@ -8,7 +8,7 @@ from datetime import datetime
 env.hosts = ['35.185.87.254', '52.72.127.245']
 env.user = "ubuntu"
 env.key_filename = "~/.ssh/holberton"
-# env.warn_only = True'''
+env.warn_only = True
 
 
 def do_pack():
@@ -34,27 +34,25 @@ def do_deploy(archive_path):
         # upload to /tmp dir to server
         put(local_path=archive_path, remote_path="/tmp")
         # create destination directory
-        run("sudo mkdir -p /data/web_static/releases/" + filename + "/")
+        run("mkdir -p /data/web_static/releases/" + filename + "/")
         # uncompress tar file to a directory
-        run("sudo tar -xzf /tmp/" + filename + ".tgz" +
+        run("tar -xzf /tmp/" + filename + ".tgz" +
             " -C /data/web_static/releases/" + filename + "/")
         # Delete archive upload
-        run("sudo rm -rf /tmp/" + filename + ".tgz")
+        run("rm -rf /tmp/" + filename + ".tgz")
         # move file
         '''
         run("sudo mv /data/web_static/releases/" + filename +
             "/web_static/* /data/web_static/releases/" + filename + "/")
         '''
         # delete file move it
-        run("sudo rm -rf /data/web_static/releases/" + filename +
+        run("rm -rf /data/web_static/releases/" + filename +
             "/web_static")
         # delete symbolic link /data/web_static/current
-        run("sudo rm -rf /data/web_static/current")
+        run("rm -rf /data/web_static/current")
         # create a new symbolic link
-        run("sudo ln -s /data/web_static/releases/" + filename +
+        run("ln -s /data/web_static/releases/" + filename +
             " /data/web_static/current")
         return True
     except:
         return False
-
-    return True
