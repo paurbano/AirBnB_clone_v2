@@ -15,7 +15,7 @@ env.warn_only = True
 def deploy():
     """ Do all in one step """
     file_path = do_pack()
-    if file_path:
+    if os.path.exists(file_path):
         deploy = do_deploy(file_path)
         return deploy
     else:
