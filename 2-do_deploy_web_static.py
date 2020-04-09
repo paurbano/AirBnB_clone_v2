@@ -19,7 +19,7 @@ def do_pack():
     local("mkdir -p versions")
     local("tar -cvzf " + file_path + " web_static")
     if os.path.exists(file_path):
-        pass
+        return file_path
     else:
         return None
 
