@@ -35,33 +35,36 @@ def do_pack():
 
 
 def do_deploy(archive_path):
-    """ upload file to web servers and deploy """
-    if not os.path.exists(archive_path):
+    """ upload to web servers and deploy """
+    if not os.path.exists(archive_path) and not os.path.isfile(archive_path):
         return False
-
-    # get file name without extension
-    filename = os.path.splitext(os.path.basename(archive_path))[0]
     try:
+        # get file name without extension
+        filename = os.path.splitext(os.path.basename(archive_path))[0]
         # upload to /tmp dir to server
         put(local_path=archive_path, remote_path="/tmp")
         # create destination directory
-        run("sudo mkdir -p /data/web_static/releases/" + filename + "/")
+        run("mkdir -p /data/web_static/releases/" + filename + "/")
         # uncompress tar file to a directory
         run("sudo tar -xzf /tmp/" + filename + ".tgz" +
             " -C /data/web_static/releases/" + filename + "/")
-        # Delete archive upload
-        run("sudo rm -rf /tmp/" + filename + ".tgz")
-        # move file
-        run("sudo mv /data/web_static/releases/" + filename +
+        # Delete file uploaded
+        run("rm /tmp/" + filename + ".tgz")
+
+        # move files to a previous folder
+        run("mv /data/web_static/releases/" + filename +
             "/web_static/* /data/web_static/releases/" + filename + "/")
-        # delete file move it
-        run("sudo rm -rf /data/web_static/releases/" + filename +
+
+        # delete that folder
+        run("rm -rf /data/web_static/releases/" + filename +
             "/web_static")
+
         # delete symbolic link /data/web_static/current
-        run("sudo rm -rf /data/web_static/current")
+        run("rm -rf /data/web_static/current")
         # create a new symbolic link
-        run("sudo ln -s /data/web_static/releases/" + filename +
-            " /data/web_static/current")
+        run("ln -s /data/web_static/releases/" + filename +
+            "/ /data/web_static/current")
+        print("New version deployed!")
         return True
     except:
         return False
