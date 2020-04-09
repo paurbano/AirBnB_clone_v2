@@ -1,6 +1,5 @@
 #!/usr/bin/python3
-# Fabric script that generates a .tgz archive from the contents
-# of the web_static folder and deploy it to servers
+# fabric script that deploy a file it to servers
 """ Fabric script to deploy """
 import os
 from fabric.api import *
@@ -9,7 +8,7 @@ from datetime import datetime
 env.hosts = ['35.185.87.254', '52.72.127.245']
 env.user = "ubuntu"
 env.key_filename = "~/.ssh/holberton"
-env.warn_only = True
+# env.warn_only = True'''
 
 
 def do_pack():
@@ -42,8 +41,10 @@ def do_deploy(archive_path):
         # Delete archive upload
         run("sudo rm -rf /tmp/" + filename + ".tgz")
         # move file
+        '''
         run("sudo mv /data/web_static/releases/" + filename +
             "/web_static/* /data/web_static/releases/" + filename + "/")
+        '''
         # delete file move it
         run("sudo rm -rf /data/web_static/releases/" + filename +
             "/web_static")
@@ -55,3 +56,5 @@ def do_deploy(archive_path):
         return True
     except:
         return False
+
+    return True
