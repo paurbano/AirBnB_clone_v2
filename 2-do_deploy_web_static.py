@@ -39,11 +39,19 @@ def do_deploy(archive_path):
             " -C /data/web_static/releases/" + filename + "/")
         # Delete file uploaded
         run("rm /tmp/" + filename + ".tgz")
+
+        run("sudo mv /data/web_static/releases/" + filename +
+            "/web_static/* /data/web_static/releases/" + filename + "/")
+
+        run("sudo rm -rf /data/web_static/releases/" + filename +
+            "/web_static")
+
         # delete symbolic link /data/web_static/current
         run("rm -rf /data/web_static/current")
         # create a new symbolic link
         run("ln -s /data/web_static/releases/" + filename +
             "/ /data/web_static/current")
+        print("New version deployed!")
         return True
     except:
         return False
