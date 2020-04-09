@@ -40,14 +40,9 @@ def do_deploy(archive_path):
             " -C /data/web_static/releases/" + filename + "/")
         # Delete archive upload
         run("rm -rf /tmp/" + filename + ".tgz")
-        # move file
-        '''
-        run("sudo mv /data/web_static/releases/" + filename +
-            "/web_static/* /data/web_static/releases/" + filename + "/")
-        '''
-        # delete file move it
+        '''# delete file move it
         run("rm -rf /data/web_static/releases/" + filename +
-            "/web_static")
+            "/web_static")'''
         # delete symbolic link /data/web_static/current
         run("rm -rf /data/web_static/current")
         # create a new symbolic link
