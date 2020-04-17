@@ -7,7 +7,7 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
 
-
+# Relationship Many-Many for task 10
 place_amenity = Table('place_amenity', Base.metadata,
                       Column('place_id', String(60),
                              ForeignKey('places.id'), primary_key=True,
@@ -46,9 +46,14 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     amenity_ids = []
+    # Condition for task 9
     if getenv('HBNB_TYPE_STORAGE') == 'db':
+        # added for task 9
+        # relation with class-table Reviews
         reviews = relationship('Review', backref='place',
                                cascade='all, delete-orphan')
+        # added for task 10
+        # relation with table/class place_amenity
         amenities = relationship('Amenity', secondary=place_amenity,
                                  backref='places', viewonly=False)
     else:
