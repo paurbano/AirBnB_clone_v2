@@ -36,7 +36,7 @@ class DBStorage():
 
     def all(self, cls=None):
         """ query all objects depending of the class name """
-        classes = ['State', 'City', 'User', 'Place', 'Review']
+        classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
         class_dict = {}
         if cls and cls in classes:
             # busca por el tipo de objeto
