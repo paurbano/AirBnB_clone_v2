@@ -2,7 +2,7 @@
 """This is the place class"""
 import models
 from os import getenv
-from models.review import Review
+# from models.review import Review
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, Float, String, ForeignKey, Table
 from sqlalchemy.orm import relationship
@@ -76,9 +76,10 @@ class Place(BaseModel, Base):
             """ Getter: return list of Amenity linked to a Place """
             list_amenities = []
             # dic_amenities = models.storage.all(models.amenity.Amenity)
-            for amenity in amenity_ids:
-                if self.id == amenity.id:
-                    list_amenities.append(amenity)
+            objs_ = models.storage.all(Amenity)
+            for key, value in objs_.items():
+                if value.id in self.amenity_ids:
+                    list_amenities.append(value)
             return list_amenities
 
         @amenities.setter
