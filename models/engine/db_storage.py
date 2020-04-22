@@ -77,5 +77,5 @@ class DBStorage():
     # added for AirBnB clone - Web framework
     # task 7
     def close(self):
-        ''' close method'''
-        self.__session.reload()
+        ''' close session'''
+        self.__session.close()
