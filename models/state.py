@@ -23,13 +23,14 @@ class State(BaseModel, Base):
     else:
         name = ""
 
-    # Added for task 6
-    # if getenv("HBNB_TYPE_STORAGE") == "file":
+        # Added for task 6
+        # if getenv("HBNB_TYPE_STORAGE") == "file":
         @property
         def cities(self):
             list_of_cities = []
             dic_cities = models.storage.all(City)
-            for city in dic_cities.items():
+            # for city in dic_cities.items():
+            for city in dic_cities.values():
                 if city.state_id == self.id:
                     list_of_cities.append(city)
             return list_of_cities

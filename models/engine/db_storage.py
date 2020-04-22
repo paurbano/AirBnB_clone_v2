@@ -38,6 +38,7 @@ class DBStorage():
         """ query all objects depending of the class name """
         classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
         class_dict = {}
+        # print("All DbStorage")
         if cls and cls in classes:
             # busca por el tipo de objeto
             _object = self.__session.query(cls).all()
@@ -73,8 +74,9 @@ class DBStorage():
             bind=self.__engine, expire_on_commit=False))
         self.__session = Session()
 
-    # esto hay que revisarlo con cuidadito!!!!
-    '''
+    
+    # added for AirBnB clone - Web framework
+    # task 7
     def close(self):
-        self.__session.close()
-    '''
+        ''' close method'''
+        self.__session.reload()
