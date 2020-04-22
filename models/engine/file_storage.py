@@ -35,12 +35,12 @@ class FileStorage:
         class_dict = {}
         # print("All FileStorage")
         for key, value in self.__objects.items():
-            # _class = value.__class__
-            # _value = value.__class__.__name__
-            _class = cls.__name__
-            _obj = type(value).__name__
-            # if cls == _class or cls == _value:
-            if _class == _obj:
+            _class = value.__class__
+            _value = value.__class__.__name__
+            # _class = cls.__name__
+            # _obj = type(value).__name__
+            if cls == _class or cls == _value:
+                # if _class == _obj:
                 class_dict[key] = value
         return class_dict
 
