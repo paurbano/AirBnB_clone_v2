@@ -19,7 +19,7 @@ class FileStorage:
     """
     __file_path = "file.json"
     __objects = {}
-    #name = "FileStorage"
+    # name = "FileStorage"
 
     # add cls parameter for taks 5
     # return a dictionary by class parameter
@@ -35,11 +35,11 @@ class FileStorage:
         class_dict = {}
         # print("All FileStorage")
         for key, value in self.__objects.items():
-            #_class = value.__class__
+            # _class = value.__class__
             # _value = value.__class__.__name__
             _class = cls.__name__
             _obj = type(value).__name__
-            #if cls == _class or cls == _value:
+            # if cls == _class or cls == _value:
             if _class == _obj:
                 class_dict[key] = value
         return class_dict
@@ -79,7 +79,6 @@ class FileStorage:
             key = "{}.{}".format(type(obj).__name__, obj.id)
             if key in self.__objects:
                 del self.__objects[key]
-
 
     # added for AirBnB clone - Web framework
     # task 7
