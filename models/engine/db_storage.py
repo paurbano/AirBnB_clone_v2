@@ -4,7 +4,6 @@ from os import getenv
 from models.base_model import BaseModel, Base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.orm import scoped_session
-from models.base_model import BaseModel
 from models.user import User
 from models.state import State
 from models.city import City
@@ -39,18 +38,18 @@ class DBStorage():
         classes = ['State', 'City', 'User', 'Place', 'Review', 'Amenity']
         class_dict = {}
         # print("All DbStorage")
-        if cls and cls in classes:
+        if cls is None:
+            for _class in classes:
+                _object = self.__session.query(eval(_class))
+                for _obj in _object:
+                    key = type(_obj).__name__ + '.' + _obj.id
+                    class_dict[key] = _obj
+        else:
             # busca por el tipo de objeto
             _object = self.__session.query(cls).all()
             for _obj in _object:
                 key = type(_obj).__name__ + '.' + _obj.id
                 class_dict[key] = _obj
-        else:
-            for _class in classes:
-                _object = self.__session.query(eval(_class)).all()
-                for _obj in _object:
-                    key = type(_obj).__name__ + '.' + _obj.id
-                    class_dict[key] = _obj
         return class_dict
 
     def new(self, obj):
