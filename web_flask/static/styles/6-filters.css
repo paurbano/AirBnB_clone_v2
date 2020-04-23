@@ -50,9 +50,8 @@ button:hover {
     height: 100%;
     width: 25%;
 }
-.popover {
+.filters .popover {
     visibility: hidden;
-    width: 100%;
     border: 1px solid #DDDDDD;
     border-radius: 4px;
     background: #FAFAFA;
